@@ -1,25 +1,40 @@
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import Overview from "./components/Overview.js";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = { newtask: "" };
+    this.handlerOfChange = this.handlerOfChange.bind(this);
+    this.handlerOfSubmit = this.handlerOfSubmit.bind(this);
+  }
+  handlerOfChange = function (event) {
+    this.setState({ newtask: event.target.value });
+  };
+
+  handlerOfSubmit = function (event) {
+    event.preventDefault();
+    // isto esta mal
+    <Overview taskdescription="oi" />;
+    //    <Overview taskdescription={this.state.newtask} />;
+  };
+
+  //value={this.state.value} no input text according to react mas afinal nao é preciso
+
+  render() {
+    return (
+      <div>
+        <h1>Create a list of tasks</h1>
+        <form onSubmit={this.handlerOfSubmit}>
+          <label>
+            Task:
+            <input type="text" onChange={this.handlerOfChange} />
+          </label>
+          <input type="submit" value="Add task" />
+        </form>
+      </div>
+    );
+  }
 }
 
 export default App;

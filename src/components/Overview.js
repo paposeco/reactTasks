@@ -1,19 +1,16 @@
 import React from "react";
 
 const Overview = function (props) {
-  // nao percebo {}
-  const { tasks } = props;
-  //  const {deleteTaskMaybe} =
-
+  //  nao percebo {}
   return (
     <ul>
-      {tasks.map((task, index) => {
+      {props.tasks.map((task, index) => {
         return (
           <li key={task.id}>
             Task {task.tasknumber}: {task.text};
             <button
               id={"delBtn" + task.tasknumber}
-              onClick={() => this.props.deleteTask(task.tasknumber)}
+              onClick={() => props.deleteTaskPlease(task.id)}
             >
               Delete
             </button>
@@ -23,6 +20,35 @@ const Overview = function (props) {
     </ul>
   );
 };
+
+// const NewFunctionalComponent = (props) => {
+//   return (
+//     <div>
+//       <button onClick={() => props.noClickMe()}>No, Click Me!</button>
+//     </div>
+//   );
+// };
+// class Overview extends React.Component {
+//   render() {
+//     const { tasks } = this.props;
+//     return (
+//       <ul>
+//         {tasks.map((task, index) => {
+//           console.log(task, index);
+//           <li key={task.id}>
+//             Task {task.tasknumber}: {task.text};
+//             <button
+//               id={"delBtn" + task.tasknumber}
+//               onClick={() => this.props.deleteTaskPlease(task)}
+//             >
+//               Delete
+//             </button>
+//           </li>;
+//         })}
+//       </ul>
+//     );
+//   }
+// }
 
 export default Overview;
 

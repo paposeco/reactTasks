@@ -11,12 +11,14 @@ class App extends React.Component {
         id: uniqid(),
         //o tasknumber começa a 0 e so adiciono um no submit pq o set change do input corre de cada vez que se escreve uma letra, e estava sempre a adicionar +1
         tasknumber: 0,
+        edit: false,
       },
       arrayoftasks: [],
     };
     this.deleteTask = this.deleteTask.bind(this);
     this.handlerOfChange = this.handlerOfChange.bind(this);
     this.handlerOfSubmit = this.handlerOfSubmit.bind(this);
+    this.editTask = this.editTask.bind(this);
   }
   handlerOfChange = function (event) {
     this.setState({
@@ -41,22 +43,44 @@ class App extends React.Component {
   };
 
   deleteTask = function (ataskid) {
-    console.log("starter array");
-    console.log(this.state.arrayoftasks);
-    console.log("task to be deleted");
-    console.log(ataskid);
     const currentarray = this.state.arrayoftasks;
     const newarray = currentarray.filter((task) => task.id !== ataskid);
-    console.log("changed array");
-    console.log(newarray);
     this.setState({
       arrayoftasks: newarray,
+    });
+  };
+
+  editTask = function (atask) {
+    this.setState({
+      task: {
+        edit: true,
+      },
     });
   };
 
   render() {
     // nao percebo bem estas cosntantes antes do return
     const { task, arrayoftasks } = this.state;
+
+    // return (
+    //   <div>
+    //     <h1>Create a list of tasks</h1>
+    //     <form onSubmit={this.handlerOfSubmit}>
+    //       <label>
+    //         Task:
+    //         <input
+    //           type="text"
+    //           onChange={this.handlerOfChange}
+    //           value={
+    //             task.text
+    //           } /* ao colocar isto aqui, quando se corre a funciona de submit, faz se clear ao text da task e limpa o input*/
+    //         />
+    //       </label>
+    //       <input type="submit" value="Add task" />
+    //     </form>
+    //     <Overview tasks={arrayoftasks} deleteTaskPlease={this.deleteTask} editTask={this.editTask}/>
+    //   </div>
+    // );
 
     return (
       <div>
@@ -67,14 +91,18 @@ class App extends React.Component {
             <input
               type="text"
               onChange={this.handlerOfChange}
-              value={
-                task.text
-              } /* ao colocar isto aqui, quando se corre a funciona de submit, faz se clear ao text da task e limpa o input*/
+              value={task.text}
+              /* ao colocar isto aqui, quando se corre a funciona de submit, faz se clear ao text da task e limpa o input */
             />
           </label>
           <input type="submit" value="Add task" />
         </form>
-        <Overview tasks={arrayoftasks} deleteTaskPlease={this.deleteTask} />
+
+        <Overview
+          tasks={arrayoftasks}
+          deleteTaskPlease={this.deleteTask}
+          editTask={this.editTask}
+        />
       </div>
     );
   }

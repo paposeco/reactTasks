@@ -26,6 +26,7 @@ class App extends React.Component {
         text: event.target.value,
         id: this.state.task.id,
         tasknumber: this.state.task.tasknumber,
+        edit: false,
       },
     });
   };
@@ -38,6 +39,7 @@ class App extends React.Component {
         text: "",
         id: uniqid(),
         tasknumber: this.state.task.tasknumber + 1,
+        edit: false,
       },
     });
   };
@@ -52,35 +54,13 @@ class App extends React.Component {
 
   editTask = function (atask) {
     this.setState({
-      task: {
-        edit: true,
-      },
+      task: { edit: true },
     });
   };
 
   render() {
     // nao percebo bem estas cosntantes antes do return
     const { task, arrayoftasks } = this.state;
-
-    // return (
-    //   <div>
-    //     <h1>Create a list of tasks</h1>
-    //     <form onSubmit={this.handlerOfSubmit}>
-    //       <label>
-    //         Task:
-    //         <input
-    //           type="text"
-    //           onChange={this.handlerOfChange}
-    //           value={
-    //             task.text
-    //           } /* ao colocar isto aqui, quando se corre a funciona de submit, faz se clear ao text da task e limpa o input*/
-    //         />
-    //       </label>
-    //       <input type="submit" value="Add task" />
-    //     </form>
-    //     <Overview tasks={arrayoftasks} deleteTaskPlease={this.deleteTask} editTask={this.editTask}/>
-    //   </div>
-    // );
 
     return (
       <div>
